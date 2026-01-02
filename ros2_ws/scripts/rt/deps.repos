@@ -1,0 +1,149 @@
+repositories:
+  ackermann_msgs:
+    type: git
+    url: https://github.com/ros-drivers/ackermann_msgs.git
+    version: ros2
+  angles:
+    type: git
+    url: https://github.com/ros/angles.git
+    version: humble-devel
+  backward_ros:
+    type: git
+    url: https://github.com/pal-robotics/backward_ros.git
+    version: 1.0.8
+  behaviortree_cpp:
+    type: git
+    url: https://github.com/BehaviorTree/BehaviorTree.CPP.git
+    version: 3.8.6
+  bond_core:
+    type: git
+    url: https://github.com/ros/bond_core.git
+    version: 3.0.2
+  control_msgs:
+    type: git
+    url: https://github.com/ros-controls/control_msgs.git
+    version: humble
+  control_toolbox:
+    type: git
+    url: https://github.com/ros-controls/control_toolbox.git
+    version: humble
+  cpp_polyfills:
+    type: git
+    url: https://github.com/PickNikRobotics/cpp_polyfills.git
+    version: main
+  create3_sim:
+    type: git
+    url: https://github.com/iRobotEducation/create3_sim.git
+    version: humble
+  diagnostic:
+    type: git
+    url: https://github.com/ros/diagnostics.git
+    version: ros2-humble
+  eigen_stl_containers:
+    type: git
+    url: https://github.com/ros/eigen_stl_containers.git
+    version: ros2
+  filters:
+    type: git
+    url: https://github.com/ros/filters.git
+    version: ros2
+  generate_parameter_library:
+    type: git
+    url: https://github.com/PickNikRobotics/generate_parameter_library.git
+    version: 0.5.0
+  geometric_shapes:
+    type: git
+    url: https://github.com/ros-planning/geometric_shapes.git
+    version: ros2
+  graph_msgs:
+    type: git
+    url: https://github.com/PickNikRobotics/graph_msgs.git
+    version: ros2
+  irobot_create_msgs:
+    type: git
+    url: https://github.com/iRobotEducation/irobot_create_msgs.git
+    version: humble
+  joint_state_publisher:
+    type: git
+    url: https://github.com/ros/joint_state_publisher.git
+    version: ros2
+  joystick_drivers:
+    type: git
+    url: https://github.com/ros-drivers/joystick_drivers.git
+    version: ros2
+  kinematics_interface:
+    type: git
+    url: https://github.com/ros-controls/kinematics_interface.git
+    version: humble
+  object_recognition_msgs:
+    type: git
+    url: https://github.com/wg-perception/object_recognition_msgs.git
+    version: ros2
+  octomap:
+    type: git
+    url: https://github.com/octomap/octomap.git
+    version: v1.10.0
+  octomap_msgs:
+    type: git
+    url: https://github.com/octomap/octomap_msgs.git
+    version: ros2
+  ompl:
+    type: git
+    url: https://github.com/ompl/ompl.git
+    version: 1.6.0
+  py_binding_tools:
+    type: git
+    url: https://github.com/ros-planning/py_binding_tools.git
+    version: ros2
+  random_numbers:
+    type: git
+    url: https://github.com/ros-planning/random_numbers.git
+    version: ros2
+  realtime_tools:
+    type: git
+    url: https://github.com/ros-controls/realtime_tools.git
+    version: humble
+  ros2_control:
+    type: git
+    url: https://github.com/ros-controls/ros2_control.git
+    version: humble
+  ros2_controllers:
+    type: git
+    url: https://github.com/ros-controls/ros2_controllers.git
+    version: humble
+  rqt_robot_monitor:
+    type: git
+    url: https://github.com/ros-visualization/rqt_robot_monitor.git
+    version: humble
+  rsl:
+    type: git
+    url: https://github.com/PickNikRobotics/RSL.git
+    version: main
+  ruckig:
+    type: git
+    url: https://github.com/pantor/ruckig.git
+    version: v0.15.3
+  rviz_visual_tools:
+    type: git
+    url: https://github.com/PickNikRobotics/rviz_visual_tools.git
+    version: ros2
+  slam-toolbox:
+    type: git
+    url: https://github.com/SteveMacenski/slam_toolbox.git
+    version: humble
+  urdfdom_py:
+    type: git
+    url: https://github.com/ros/urdf_parser_py.git
+    version: ros2
+  vision_opencv:
+    type: git
+    url: https://github.com/ros-perception/vision_opencv.git
+    version: humble
+  warehouse_ros:
+    type: git
+    url: https://github.com/ros-planning/warehouse_ros.git
+    version: ros2
+  xacro:
+    type: git
+    url: https://github.com/ros/xacro.git
+    version: 2.0.13

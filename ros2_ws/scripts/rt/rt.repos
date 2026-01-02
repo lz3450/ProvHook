@@ -1,0 +1,13 @@
+repositories:
+  navigation2:
+    type: git
+    url: https://github.com/ros-planning/navigation2.git
+    version: humble
+  turtlebot4:
+    type: git
+    url: https://github.com/turtlebot/turtlebot4.git
+    version: humble
+  turtlebot4_desktop:
+    type: git
+    url: https://github.com/turtlebot/turtlebot4_desktop.git
+    version: humble

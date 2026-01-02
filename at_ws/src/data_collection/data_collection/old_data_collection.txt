@@ -1,0 +1,135 @@
+import rclpy
+from rclpy.node import Node
+from nav_msgs.msg import Odometry
+from geometry_msgs.msg import Twist
+import numpy as np
+import message_filters
+import math
+import pandas as pd
+from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy
+
+COLUMN_HEADERS = [
+    "pos_x", "pos_y", "yaw",
+    "imu_orientation_x", "imu_orientation_y", "imu_orientation_z", "imu_angular_velocity_x", "imu_angular_velocity_y", "imu_angular_velocity_z", "imu_linear_acceleration_x", "imu_linear_acceleration_y", "linear_acceleration_z"
+    "linear_vel_x", "angular_vel_z",
+    "cmd_linear_x", "cmd_angular_z"
+]
+
+class DataLogger(Node):
+    def __init__(self):
+        super().__init__('data_logger')
+        self.get_logger().info("Data Logger Node Started")
+        self.last_cmd_vel_msg = None
+
+        qos_profile_reliable = QoSProfile(
+        reliability=ReliabilityPolicy.RELIABLE,
+        history=HistoryPolicy.KEEP_LAST,
+        depth=10
+        )
+
+        qos_profile_best_effort = QoSProfile(          
+        reliability=ReliabilityPolicy.BEST_EFFORT,
+        history=HistoryPolicy.KEEP_LAST,
+        depth=10
+        )
+
+
+        self.odom_sub = self.create_subscription(
+            Odometry,
+            '/odom',
+            self.odom_callback,
+            qos_profile=qos_profile_best_effort
+        )
+        self.cmd_vel_sub = self.create_subscription(
+            Twist,
+            '/cmd_vel',
+            self.cmd_vel_callback,
+            qos_profile=qos_profile_best_effort
+        )
+
+        self.imu_sub = self.create_subscription(
+            Imu,
+            '/imu',
+            self.imu_callback,
+            qos_profile=qos_profile_best_effort
+        )
+
+        self.data_buffer = []
+        self.save_path = "carter_data.csv"
+        self.get_logger().info(f"Logging data. Press Ctrl+C to stop and save to {self.save_path}.")
+
+    def cmd_vel_callback(self, msg):
+        
+        if self.last_cmd_vel_msg is None:
+            self.get_logger().info("First cmd_vel message received. Starting data collection.")
+        self.last_cmd_vel_msg = msg
+
+    def odom_callback(self, odom_msg):
+      
+        # Do nothing until we have received at least one command
+        if self.last_cmd_vel_msg is None:
+            return
+
+        # --- Extract features from odometry message ---
+        pos_x = odom_msg.pose.pose.position.x
+        pos_y = odom_msg.pose.pose.position.y
+        orientation_q = odom_msg.pose.pose.orientation
+        _, _, yaw = self.euler_from_quaternion(orientation_q)
+        linear_vel_x = odom_msg.twist.twist.linear.x
+        angular_vel_z = odom_msg.twist.twist.angular.z
+
+        # --- Use the last received cmd_vel as the target ---
+        cmd_linear_x = self.last_cmd_vel_msg.linear.x
+        cmd_angular_z = self.last_cmd_vel_msg.angular.z
+        
+        # Create a single data row 
+        data_row = [pos_x, pos_y, yaw, linear_vel_x, angular_vel_z, cmd_linear_x, cmd_angular_z]
+        self.data_buffer.append(data_row)
+
+        if len(self.data_buffer) % 100 == 0:
+            self.get_logger().info(f"Collected {len(self.data_buffer)} data points.")
+
+    def euler_from_quaternion(self, q):
+        """
+        Convert a quaternion into euler angles (roll, pitch, yaw)
+        roll is rotation around x in radians (counterclockwise)
+        pitch is rotation around y in radians (counterclockwise)
+        yaw is rotation around z in radians (counterclockwise)
+        """
+        t0 = +2.0 * (q.w * q.x + q.y * q.z)
+        t1 = +1.0 - 2.0 * (q.x * q.x + q.y * q.y)
+        roll_x = math.atan2(t0, t1)
+     
+        t2 = +2.0 * (q.w * q.y - q.z * q.x)
+        t2 = +1.0 if t2 > +1.0 else t2
+        t2 = -1.0 if t2 < -1.0 else t2
+        pitch_y = math.asin(t2)
+     
+        t3 = +2.0 * (q.w * q.z + q.x * q.y)
+        t4 = +1.0 - 2.0 * (q.y * q.y + q.z * q.z)
+        yaw_z = math.atan2(t3, t4)
+     
+        return roll_x, pitch_y, yaw_z
+
+    def save_data(self):
+        if self.data_buffer:
+            df = pd.DataFrame(self.data_buffer, columns=COLUMN_HEADERS)
+            df.to_csv(self.save_path, index=False)
+            self.get_logger().info(f"Saved {len(self.data_buffer)} data points to {self.save_path}.")
+        else:
+            self.get_logger().warn("No data collected, nothing to save.")
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = DataLogger()
+    try:
+        rclpy.spin(node)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        node.save_data()
+        node.destroy_node()
+        rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()

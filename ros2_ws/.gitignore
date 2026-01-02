@@ -1,0 +1,9 @@
+.cache/
+
+*.tar*
+
+/archive
+/src
+/build
+/log
+/install

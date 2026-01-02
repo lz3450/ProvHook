@@ -1,0 +1,2 @@
+float32 scale_rotation
+float32 scale_forward

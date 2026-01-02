@@ -1,0 +1,14 @@
+<!--
+  A very basic, but functional navigator
+-->
+
+<root main_tree_to_execute="MainTree">
+    <BehaviorTree ID="MainTree">
+        <PipelineSequence name="NavigateWithSpinningAndForward">
+            <!-- Spin in place to face the goal -->
+            <SpinToGoal goal="{goal}" />
+            <!-- Move forward in a straight line -->
+            <MoveForwardToGoal goal="{goal}" />
+        </PipelineSequence>
+    </BehaviorTree>
+</root>
