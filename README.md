@@ -43,38 +43,38 @@ The application checks the compatibility of the system and shows the results in 
 
 ## PyTorch Setup
 
-Install latest PyTorch:
+Install the latest PyTorch:
 ```sh
 python3 -m pip install torch
 ```
 
-## ROS2 Setup
+## ROS 2 Setup
 
 Prepare:
 ```sh
 cd ros2_ws/scripts
 ```
 
-### ROS2 Humble Setup
+### ROS 2 Humble Setup
 
-Setup ros2 dev tools and ros2 repo:
+Setup ROS 2 dev tools and ROS 2 repo:
 ```sh
 ./setup-ros2-repo.sh
 ```
 
-Get latest ros2 source code:
+Get latest ROS 2 source code:
 ```sh
 ./ros2_humble/1-update-src.sh
 ```
 
-Install ros2 dependencies:
+Install ROS 2 dependencies:
 ```sh
 ./ros2_humble/2-install-deps.sh
 ```
 
 ### AutoTrace Setup
 
-Get latest AutoTrace ros2 dependency source code:
+Get the latest AutoTrace ROS 2 dependency source code:
 ```sh
 ./rt/1-update-src.sh
 ```
@@ -86,7 +86,7 @@ Install AutoTrace dependencies:
 
 ### Build
 
-Build ros2 packages:
+Build ROS 2 packages:
 ```sh
 ./build.sh
 ```
