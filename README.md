@@ -72,16 +72,16 @@ Install ROS 2 dependencies:
 ./ros2_humble/2-install-deps.sh
 ```
 
-### AutoTrace Setup
+### Test Case Setup
 
-Get the latest AutoTrace ROS 2 dependency source code:
+Get the latest test case ROS 2 dependency source code:
 ```sh
-./rt/1-update-src.sh
+./at/1-update-src.sh
 ```
 
-Install AutoTrace dependencies:
+Install test case dependencies:
 ```sh
-./rt/2-install-deps.sh
+./at/2-install-deps.sh
 ```
 
 ### Build
