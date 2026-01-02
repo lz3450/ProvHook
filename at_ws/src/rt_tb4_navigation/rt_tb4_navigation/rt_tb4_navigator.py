@@ -37,7 +37,7 @@ from rclpy.duration import Duration
 from rclpy.qos import qos_profile_sensor_data, qos_profile_system_default
 
 
-class RoboTraceDirections(IntEnum):
+class AutoTraceDirections(IntEnum):
     NORTH = 0
     NORTH_WEST = 45
     WEST = 90
@@ -48,7 +48,7 @@ class RoboTraceDirections(IntEnum):
     NORTH_EAST = 315
 
 
-class RoboTraceNavigator(BasicNavigator):
+class AutoTraceNavigator(BasicNavigator):
     is_docked = None
     creating_path = False
 

@@ -3,7 +3,7 @@
 <package format="3">
   <name>rt_tb4_navigation</name>
   <version>1.0.5</version>
-  <description>RoboTrace Navigation</description>
+  <description>AutoTrace Navigation</description>
   <maintainer email="lz3450@outlook.com">kzl</maintainer>
   <license>Apache 2.0</license>
 

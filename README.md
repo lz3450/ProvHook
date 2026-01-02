@@ -72,14 +72,14 @@ Install ros2 dependencies:
 ./ros2_humble/2-install-deps.sh
 ```
 
-### RoboTrace Setup
+### AutoTrace Setup
 
-Get latest RoboTrace ros2 dependency source code:
+Get latest AutoTrace ros2 dependency source code:
 ```sh
 ./rt/1-update-src.sh
 ```
 
-Install RoboTrace dependencies:
+Install AutoTrace dependencies:
 ```sh
 ./rt/2-install-deps.sh
 ```
